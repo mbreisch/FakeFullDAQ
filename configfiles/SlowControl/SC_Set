@@ -1,0 +1,10 @@
+verbose 1
+LV_state_set 1
+HV_state_set 0
+HV_volts 100
+relayCh1 0
+relayCh2 0
+relayCh3 0
+Trig1_threshold 1
+Trig0_threshold 1
+TrigVref 2.981

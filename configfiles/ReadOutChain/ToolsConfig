@@ -1,0 +1,6 @@
+ACC_Receive ACC_Receive configfiles/ReadOutChain/BoardsConfig
+#ACC_SetupBoards ACC_SetupBoards configfiles/ReadOutChain/BoardsConfig
+ACC_DataRead ACC_DataRead configfiles/ReadOutChain/BoardsConfig
+ACC_Stream ACC_Stream configfiles/ReadOutChain/BoardsConfig
+
+

@@ -1,0 +1,5 @@
+SC_Receive SC_Receive configfiles/SlowControl/SC_Receive
+#SC_SetConfig SC_SetConfig configfiles/SlowControl/SC_Set
+SC_Poll SC_Poll configfiles/SlowControl/SC_Poll
+SC_Emergency SC_Emergency configfiles/SlowControl/SC_Emergency
+SC_Stream SC_Stream configfiles/SlowControl/SC_Stream
