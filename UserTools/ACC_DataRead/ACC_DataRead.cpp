@@ -16,42 +16,42 @@ bool ACC_DataRead::Initialise(std::string configfile, DataModel &data){
 	//Fake Data
 	///Load Raw Board 1
 	cout << " Reading Board 1";
-	m_variables.Get("filenameB1",fileB1);
+	fileB1 = "./configfiles/ReadOutChain/B1.txt";
 	LoadFile(fileB1,1,0);
 	cout << "... done" << endl; 
 	cout << "Got " << m_data->TCS.ReadFileData[0].size() << endl;
 
 	///Load Raw Board 2
 	cout << " Reading Board 2";
-	m_variables.Get("filenameB2",fileB2);
+	fileB2 = "./configfiles/ReadOutChain/B2.txt";
 	LoadFile(fileB2,1,1);	
 	cout << "... done" << endl; 
 	cout << "Got " << m_data->TCS.ReadFileData[1].size() << endl;
 
 	///Load Raw Board 3
 	cout << " Reading Board 3";
-	m_variables.Get("filenameB3",fileB3);
+	fileB3 = "./configfiles/ReadOutChain/B3.txt";
 	LoadFile(fileB3,1,2);	
 	cout << "... done" << endl; 
 	cout << "Got " << m_data->TCS.ReadFileData[2].size() << endl;
 
 	///Load Raw Board 4
 	cout << " Reading Board 4";
-	m_variables.Get("filenameB4",fileB4);
+	fileB4 = "./configfiles/ReadOutChain/B4.txt";
 	LoadFile(fileB4,1,3);
 	cout << "... done" << endl; 
 	cout << "Got " << m_data->TCS.ReadFileData[3].size() << endl;
 
 	//Fake ACC
 	cout << " Reading ACC Frame";
-	m_variables.Get("filenameACC",fileACC);
+	fileACC = "./configfiles/ReadOutChain/ACC.txt";
 	LoadFile(fileACC,2,0);
 	cout << "... done" << endl; 
 	cout << "Got " << m_data->TCS.ReadFileACC.size() << endl;
 
 	//Fake Error 
 	cout << " Reading Errors";
-	m_variables.Get("filenameError",fileError);
+	fileError = "./configfiles/ReadOutChain/ERROR.txt";
 	LoadFile(fileError,3,0);
 	cout << "... done" << endl; 
 	cout << "Got " << m_data->TCS.ReadFileError.size() << endl;
