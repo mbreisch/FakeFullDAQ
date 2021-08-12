@@ -6,14 +6,6 @@ IP_BIND 0.0.0.0
 Port 8888
 Port_BIND 6666
 
-#TempLoadFiles
-filenameB1 ./configfiles/ReadOutChain/B1.txt
-filenameB2 ./configfiles/ReadOutChain/B2.txt
-filenameB3 ./configfiles/ReadOutChain/B3.txt
-filenameB4 ./configfiles/ReadOutChain/B4.txt
-filenameACC ./configfiles/ReadOutChain/ACC.txt
-filenameError ./configfiles/ReadOutChain/Error.txt
-
 #Trigger
 ##Triggermode
 Triggermode 1 #...
