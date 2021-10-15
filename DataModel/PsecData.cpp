@@ -5,6 +5,7 @@ PsecData::PsecData(){}
 bool PsecData::Send(zmq::socket_t* sock){
 
 	int S_RawWaveform = RawWaveform.size();
+	int S_BoardIndex = BoardIndex.size();
 	int S_AccInfoFrame = AccInfoFrame.size();
 	int S_errorcodes = errorcodes.size();
 	//int S_AcdcInfoFrame = AcdcInfoFrame.size();
@@ -12,8 +13,10 @@ bool PsecData::Send(zmq::socket_t* sock){
 	zmq::message_t msg1(sizeof VersionNumber);
 	std::memcpy(msg1.data(), &VersionNumber, sizeof VersionNumber);
 	
-	zmq::message_t msg2(sizeof BoardIndex);
-	std::memcpy(msg2.data(), &BoardIndex,sizeof BoardIndex);
+	zmq::message_t msg2(sizeof S_BoardIndex);
+	std::memcpy(msg2.data(), &S_BoardIndex,sizeof S_BoardIndex);
+	zmq::message_t msg21(sizeof(int) * S_BoardIndex);
+	std::memcpy(msg21.data(), BoardIndex.data(), sizeof(int) * S_BoardIndex);
 	
 	zmq::message_t msg3(sizeof S_RawWaveform);
 	std::memcpy(msg3.data(), &S_RawWaveform, sizeof S_RawWaveform);
@@ -40,6 +43,7 @@ bool PsecData::Send(zmq::socket_t* sock){
 
 	sock->send(msg1,ZMQ_SNDMORE);
 	sock->send(msg2,ZMQ_SNDMORE);
+	sock->send(msg21,ZMQ_SNDMORE);
 	sock->send(msg3,ZMQ_SNDMORE);
 	sock->send(msg4,ZMQ_SNDMORE);
 	sock->send(msg5,ZMQ_SNDMORE);
@@ -64,10 +68,17 @@ bool PsecData::Receive(zmq::socket_t* sock){
 	if(tempVersionNumber == VersionNumber)
 	{
 		sock->recv(&msg);
-		BoardIndex=*(reinterpret_cast<int*>(msg.data()));
-
-		sock->recv(&msg);
 		int tmp_size=0;
+		tmp_size=*(reinterpret_cast<int*>(msg.data()));
+		if(tmp_size>0)
+		{
+			sock->recv(&msg);
+			BoardIndex.resize(msg.size()/sizeof(int));
+			std::memcpy(&BoardIndex[0], msg.data(), msg.size());
+		}
+		
+		sock->recv(&msg);
+		tmp_size=0;
 		tmp_size=*(reinterpret_cast<int*>(msg.data()));
 		if(tmp_size>0)
 		{
@@ -121,6 +132,9 @@ bool PsecData::Receive(zmq::socket_t* sock){
 bool PsecData::Print(){
 	std::cout << "----------------------Sent data---------------------------" << std::endl;
 	printf("Version number: 0x%04x\n", VersionNumber);
+	printf("Board number: ");
+	for(int i:BoardIndex){printf("%i\t", i);}
+	printf("\n");
 	printf("Board number: %i\n", BoardIndex);
 	printf("Failed read attempts: %i\n", FailedReadCounter);
 	printf("Waveform size: %li\n", RawWaveform.size());
