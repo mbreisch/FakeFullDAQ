@@ -30,7 +30,7 @@ class PsecData{
 
   //To send data 
   vector<int> BoardIndex;
-  unsigned int VersionNumber = 0x0001;
+  unsigned int VersionNumber = 0x0003;
   vector<unsigned short> AccInfoFrame;
   vector<unsigned short> RawWaveform;
   //vector<unsigned short> AcdcInfoFrame;
